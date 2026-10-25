@@ -1,0 +1,427 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  pointer-events: none;
+}
+
+.card {
+  --pad: 20px;
+  --gap: 16px;
+  --radius: 20px;
+  --tabs: 32px;
+  --button: 40px;
+  --width: 308px;
+  --content: calc(var(--width) - 2px - 2 * var(--pad));
+  --ink: #111;
+  --soft: #8a8a8a;
+  --guide: #d4d4d4;
+  --spacing: #ec4899;
+  --spacing-line: rgba(236, 72, 153, 0.4);
+  --spacing-fill:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(236, 72, 153, 0.16) 0 1px,
+      transparent 1px 6px
+    ),
+    rgba(236, 72, 153, 0.04);
+  --size: #3b82f6;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  width: var(--width);
+  padding: var(--pad);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+  color: var(--ink);
+}
+
+.block {
+  position: relative;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  height: 30px;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 30px;
+}
+
+.meta {
+  height: 18px;
+  color: var(--soft);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.tabs {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  height: var(--tabs);
+  padding: 3px;
+  border-radius: 999px;
+  background: #f2f2f2;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: var(--soft);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.tabOn {
+  background: #fff;
+  color: var(--ink);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.06),
+    0 0 0 0.5px rgba(0, 0, 0, 0.05);
+}
+
+.rule {
+  height: 1px;
+  background: #ececec;
+}
+
+.sum {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.total {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 26px;
+}
+
+.unit {
+  color: var(--soft);
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.column {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 2px;
+  width: 100%;
+}
+
+.seg {
+  width: 100%;
+  border-radius: 4px;
+  background: var(--c);
+}
+
+.day {
+  color: var(--soft);
+  font-size: 11px;
+  line-height: 14px;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.legend li {
+  display: grid;
+  grid-template-columns: 8px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c);
+}
+
+.value {
+  color: var(--soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--button);
+  padding: 0 12px;
+  border-radius: 10px;
+  background: #f3f3f3;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.marked {
+  .card {
+    border-color: var(--guide);
+    box-shadow: none;
+  }
+
+  .tabs,
+  .tabOn,
+  .details {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px var(--guide);
+  }
+
+  .rule {
+    background: var(--guide);
+  }
+
+  .seg,
+  .dot {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px var(--guide);
+  }
+
+  .chevron {
+    color: var(--guide);
+  }
+
+  .block + .block::before {
+    content: '';
+    position: absolute;
+    top: calc(var(--gap) * -1);
+    left: 0;
+    width: var(--content);
+    height: var(--gap);
+    background: var(--spacing-fill);
+  }
+}
+
+.annotations {
+  position: absolute;
+  z-index: 1;
+  inset: -1px;
+  pointer-events: none;
+}
+
+.padding {
+  position: absolute;
+  inset: 1px;
+  padding: var(--pad);
+  border-radius: calc(var(--radius) - 1px);
+  background: var(--spacing-fill);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.content {
+  position: absolute;
+  inset: calc(1px + var(--pad));
+  border: 1px dashed var(--spacing-line);
+}
+
+.tag {
+  position: absolute;
+  padding: 2px 5px;
+  border-radius: 4px;
+  box-shadow: 0 0 0 2px #fff;
+  color: #fff;
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 12px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+}
+
+.tagSpacing {
+  background: var(--spacing);
+}
+
+.tagSize {
+  background: var(--size);
+}
+
+.padTop {
+  top: calc(1px + var(--pad) / 2);
+  left: 50%;
+}
+
+.padLeft {
+  top: 50%;
+  left: calc(1px + var(--pad) / 2);
+}
+
+.gapTag {
+  z-index: 1;
+  top: calc(var(--gap) / -2);
+  left: calc(var(--content) / 2);
+}
+
+.radius {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--radius);
+  height: var(--radius);
+  border-top: 1px solid var(--size);
+  border-left: 1px solid var(--size);
+  border-top-left-radius: var(--radius);
+  background: rgba(59, 130, 246, 0.08);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 9px;
+    left: -26px;
+    width: 29px;
+    height: 1px;
+    background: var(--size);
+  }
+
+  .tag {
+    z-index: 1;
+    top: 10px;
+    left: -28px;
+  }
+}
+
+.dimension {
+  --ext: 0px;
+
+  position: absolute;
+  border-color: var(--size);
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background: rgba(59, 130, 246, 0.45);
+  }
+
+  .tag {
+    top: 50%;
+    left: 50%;
+  }
+}
+
+.x {
+  height: 0;
+  border-top: 1px solid var(--size);
+
+  &::before,
+  &::after {
+    top: -4px;
+    width: 1px;
+    height: calc(8px + var(--ext));
+  }
+
+  &::before {
+    left: 0;
+  }
+
+  &::after {
+    right: 0;
+  }
+}
+
+.y {
+  width: 0;
+  border-left: 1px solid var(--size);
+
+  &::before,
+  &::after {
+    left: -4px;
+    width: calc(8px + var(--ext));
+    height: 1px;
+  }
+
+  &::before {
+    top: 0;
+  }
+
+  &::after {
+    bottom: 0;
+  }
+}
+
+.width {
+  --ext: 24px;
+
+  top: -28px;
+  left: 0;
+  right: 0;
+}
+
+.height {
+  --ext: 24px;
+
+  top: 0;
+  bottom: 0;
+  right: -28px;
+
+  &::before,
+  &::after {
+    left: auto;
+    right: -4px;
+  }
+}
+
+.tabsHeight,
+.buttonHeight {
+  --ext: calc(28px + 1px + var(--pad));
+
+  left: -28px;
+}
+
+.tabsHeight {
+  top: calc(1px + var(--pad) + 52px + var(--gap));
+  height: var(--tabs);
+}
+
+.buttonHeight {
+  bottom: calc(1px + var(--pad));
+  height: var(--button);
+}

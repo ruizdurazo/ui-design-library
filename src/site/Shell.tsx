@@ -140,7 +140,7 @@ export function Shell({ children }: { children: ReactNode }) {
           >
             <Icon icon="menu" width={18} />
           </button>
-          <span>Design</span>
+          <span>UI Design Library</span>
         </div>
         <main id="main" className={styles.main} tabIndex={-1}>
           {children}

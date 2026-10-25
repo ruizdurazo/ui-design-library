@@ -59,11 +59,13 @@ export function Section({
   children,
   code,
   align = 'center',
+  direction = 'row',
 }: {
   title: string
   children: ReactNode
   code?: string
   align?: 'center' | 'start'
+  direction?: 'row' | 'column'
 }) {
   const [open, setOpen] = useState(false)
   return (
@@ -78,7 +80,12 @@ export function Section({
       </div>
       <div className={styles.stage}>
         <div
-          className={align === 'start' ? styles.stageStart : styles.stageInner}
+          className={[
+            align === 'start' ? styles.stageStart : styles.stageInner,
+            direction === 'column' ? styles.stageColumn : '',
+          ]
+            .filter(Boolean)
+            .join(' ')}
         >
           {children}
         </div>

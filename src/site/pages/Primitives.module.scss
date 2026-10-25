@@ -6,6 +6,22 @@
   width: 100%;
 }
 
+.spendCompare.spendCompare {
+  flex: none;
+  width: min(100%, 560px);
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.photoCompare.photoCompare {
+  flex: none;
+  align-self: center;
+  width: auto;
+  height: 420px;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
 .stack {
   display: flex;
   flex-direction: column;

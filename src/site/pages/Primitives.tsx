@@ -53,6 +53,7 @@ import {
   type MenuOption,
 } from '@/components/ui'
 import { Doc, Section } from '../Doc'
+import { SpendSpecimen } from './SpendSpecimen'
 import styles from './Primitives.module.scss'
 
 const menuOptions: MenuOption[] = [
@@ -692,6 +693,7 @@ export function ContextMenuPage() {
     <Doc title="Context menu">
       <Section
         title="Right click"
+        direction="column"
         code={`<ContextMenu
   options={menuOptions}
   onSelect={(option) => setLast(option.label ?? option.key)}
@@ -1334,90 +1336,194 @@ export function ColorPage() {
   )
 }
 
-function BuildingScene({ renovated = false }: { renovated?: boolean }) {
-  const sky = renovated ? '#d7eef6' : '#e4e4e4'
-  const ground = renovated ? '#d3e8c4' : '#d0d0d0'
-  const wall = renovated ? '#fafafa' : '#f3f3f3'
-  const line = renovated ? '#e3e3e3' : '#c8c8c8'
-  const glass = renovated ? '#243038' : '#ececec'
-  const door = renovated ? '#36b908' : '#cfcfcf'
-  const foliage = renovated ? '#3aaa4a' : '#c4c4c4'
-  const trunk = renovated ? '#6b5344' : '#bdbdbd'
-  const windows = [0, 1, 2].flatMap((column) =>
-    [0, 1].map((row) => {
-      const x = 202 + column * 72
-      const y = 148 + row * 52
-      return (
-        <rect
-          key={`${column}-${row}`}
-          x={x}
-          y={y}
-          width="52"
-          height="36"
-          rx="2"
-          fill={glass}
-          stroke={renovated ? 'none' : line}
-        />
-      )
-    }),
-  )
+// const specimenFace = 'Inter, Helvetica Neue, Helvetica, Arial, sans-serif'
+// const specimenInk = '#111111'
+// const specimenMuted = '#737373'
+// const specimenGuide = 'rgba(17, 17, 17, 0.32)'
 
-  return (
-    <svg
-      viewBox="0 0 600 400"
-      role="img"
-      aria-label={
-        renovated ? 'Building after renovation' : 'Building before renovation'
-      }
-    >
-      <rect width="600" height="400" fill={sky} />
-      <circle
-        cx="508"
-        cy="74"
-        r="26"
-        fill={renovated ? '#f1c757' : '#d5d5d5'}
-      />
-      <rect y="286" width="600" height="114" fill={ground} />
-      <rect x="82" y="286" width="8" height="36" fill={trunk} />
-      <rect x="516" y="292" width="8" height="30" fill={trunk} />
-      <circle cx="86" cy="278" r="34" fill={foliage} />
-      <circle cx="520" cy="286" r="26" fill={renovated ? '#2f9a42' : foliage} />
-      <rect
-        x="168"
-        y="124"
-        width="264"
-        height="176"
-        fill={wall}
-        stroke={line}
-      />
-      {windows}
-      <rect x="274" y="246" width="52" height="54" fill={door} />
-    </svg>
-  )
-}
+// function TypeSpecimen({ marked = false }: { marked?: boolean }) {
+//   const size = 150
+//   const scale = size / 160
+//   // Inter Medium ink at 160px: cap height, x-height, descender, advance of "Type".
+//   const cap = 116.41 * scale
+//   const xHeight = 87.34 * scale
+//   const descender = 33.28 * scale
+//   const baseline = (400 - (cap + descender)) / 2 + cap + 8
+//   const origin = 300 - (379.39 * scale) / 2
+//   const labelX = 496
+//   const guides = [
+//     { y: baseline - cap, label: 'Cap height' },
+//     { y: baseline - xHeight, label: 'x-height' },
+//     { y: baseline, label: 'Baseline' },
+//     { y: baseline + descender, label: 'Descender' },
+//   ]
+//   const notes = [
+//     { kicker: 'Face', value: 'Inter', y: 34 },
+//     { kicker: 'Weight', value: '500', y: 80 },
+//     { kicker: 'Size', value: '150 px', y: baseline + descender + 32 },
+//   ]
+
+//   return (
+//     <svg
+//       viewBox="0 0 600 400"
+//       role="img"
+//       aria-label={
+//         marked
+//           ? 'Outline of the word Type, annotated with its typographic measurements'
+//           : 'The word Type set in black'
+//       }
+//     >
+//       <rect width="600" height="400" fill="#ffffff" />
+//       {marked
+//         ? guides.map((guide) => (
+//             <g key={guide.label}>
+//               <line
+//                 x1={origin - 18}
+//                 y1={guide.y}
+//                 x2={labelX - 12}
+//                 y2={guide.y}
+//                 stroke={specimenGuide}
+//                 strokeWidth="1"
+//               />
+//               <line
+//                 x1={labelX - 12}
+//                 y1={guide.y - 4}
+//                 x2={labelX - 12}
+//                 y2={guide.y + 4}
+//                 stroke={specimenGuide}
+//                 strokeWidth="1"
+//               />
+//               <text
+//                 x={labelX}
+//                 y={guide.y}
+//                 fill={specimenMuted}
+//                 fontFamily={specimenFace}
+//                 fontSize="12"
+//                 fontWeight="500"
+//                 dominantBaseline="middle"
+//               >
+//                 {guide.label}
+//               </text>
+//             </g>
+//           ))
+//         : null}
+//       <text
+//         x={origin}
+//         y={baseline}
+//         fill={marked ? 'none' : specimenInk}
+//         stroke={marked ? specimenInk : 'none'}
+//         strokeWidth={marked ? 1.35 : 0}
+//         strokeLinejoin="round"
+//         strokeLinecap="round"
+//         fontFamily={specimenFace}
+//         fontSize={size}
+//         fontWeight="500"
+//         textRendering="geometricPrecision"
+//       >
+//         Type
+//       </text>
+//       {marked
+//         ? notes.map((note) => (
+//             <g key={note.kicker} fontFamily={specimenFace} fontWeight="500">
+//               <text
+//                 x={labelX}
+//                 y={note.y}
+//                 fill={specimenMuted}
+//                 fontSize="10"
+//                 letterSpacing="0.14em"
+//               >
+//                 {note.kicker.toUpperCase()}
+//               </text>
+//               <text x={labelX} y={note.y + 20} fill={specimenInk} fontSize="15">
+//                 {note.value}
+//               </text>
+//             </g>
+//           ))
+//         : null}
+//     </svg>
+//   )
+// }
+
+// const skyline = `${import.meta.env.BASE_URL}assets/images/`
 
 export function ComparePage() {
   return (
     <Doc title="Compare">
-      <Section
+      {/* <Section
         title="Horizontal"
         align="start"
         code={`<Compare
-  beforeLabel="Before"
-  afterLabel="After"
-  before={<BuildingScene />}
-  after={<BuildingScene renovated />}
+  beforeLabel="Solid"
+  afterLabel="Outline"
+  beforeLabelTone="dark"
+  afterLabelTone="dark"
+  before={<TypeSpecimen />}
+  after={<TypeSpecimen marked />}
 />`}
       >
         <div className={styles.stretch}>
           <Compare
-            beforeLabel="Before"
-            afterLabel="After"
-            before={<BuildingScene />}
-            after={<BuildingScene renovated />}
+            beforeLabel="Solid"
+            afterLabel="Outline"
+            beforeLabelTone="dark"
+            afterLabelTone="dark"
+            before={<TypeSpecimen />}
+            after={<TypeSpecimen marked />}
           />
         </div>
+      </Section> */}
+      <Section
+        title="Component"
+        align="start"
+        code={`<Compare
+  beforeLabel="Skeleton"
+  afterLabel="Component"
+  beforeLabelTone="dark"
+  afterLabelTone="dark"
+  before={<SpendSpecimen marked />}
+  after={<SpendSpecimen />}
+/>`}
+      >
+        <Compare
+          className={styles.spendCompare}
+          aspectRatio="4 / 5"
+          beforeLabel="Skeleton"
+          afterLabel="Component"
+          beforeLabelTone="dark"
+          afterLabelTone="dark"
+          before={<SpendSpecimen marked />}
+          after={<SpendSpecimen />}
+        />
       </Section>
+      {/* <Section
+        title="Images"
+        align="start"
+        code={`<Compare
+  aspectRatio="1 / 1"
+  beforeLabel="Day"
+  afterLabel="Night"
+  beforeLabelTone="dark"
+  before={<img src="/assets/images/ny-day.png" alt="New York skyline by day" />}
+  after={<img src="/assets/images/ny-night.png" alt="New York skyline at night" />}
+/>`}
+      >
+        <Compare
+          className={styles.photoCompare}
+          aspectRatio="1 / 1"
+          beforeLabel="Day"
+          afterLabel="Night"
+          beforeLabelTone="dark"
+          before={
+            <img src={`${skyline}ny-day.png`} alt="New York skyline by day" />
+          }
+          after={
+            <img
+              src={`${skyline}ny-night.png`}
+              alt="New York skyline at night"
+            />
+          }
+        />
+      </Section> */}
     </Doc>
   )
 }

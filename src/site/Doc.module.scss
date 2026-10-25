@@ -107,6 +107,10 @@
   min-height: 88px;
 }
 
+.stageColumn {
+  flex-direction: column;
+}
+
 .stageStart {
   align-items: stretch;
   justify-content: flex-start;
