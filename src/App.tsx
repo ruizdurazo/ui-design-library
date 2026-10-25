@@ -48,12 +48,14 @@ import {
   TextPage,
 } from './site/pages/Typography'
 
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined
+
 export function App() {
   return (
     <ThemeProvider>
       <TooltipProvider>
         <ConfirmProvider>
-          <BrowserRouter>
+          <BrowserRouter basename={basename}>
             <Shell>
               <Routes>
                 <Route path="/" element={<HomePage />} />
