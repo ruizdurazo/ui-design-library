@@ -3,6 +3,7 @@
   display: flex;
   width: max-content;
   max-width: 100%;
+  --panel-offset: 10px;
 
   &:has(.viewport) {
     z-index: 20;
@@ -83,10 +84,7 @@
 
 .indicator {
   z-index: 2;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  height: 16px;
+  height: calc(var(--panel-offset) + 2px);
   top: 100%;
   overflow: hidden;
   pointer-events: none;
@@ -104,15 +102,16 @@
 }
 
 .arrow {
-  position: relative;
-  top: 4px;
+  position: absolute;
+  top: calc(var(--panel-offset) + 1px);
+  left: 50%;
   width: 10px;
   height: 10px;
   background: var(--surface);
   border-top: 1px solid var(--hairline);
   border-left: 1px solid var(--hairline);
   border-radius: 2px 0 0 0;
-  transform: rotate(45deg);
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 
 .viewportPosition {
@@ -132,7 +131,7 @@
   flex: none;
   width: var(--radix-navigation-menu-viewport-width);
   height: var(--radix-navigation-menu-viewport-height);
-  margin-top: 10px;
+  margin-top: var(--panel-offset);
   overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--hairline);
