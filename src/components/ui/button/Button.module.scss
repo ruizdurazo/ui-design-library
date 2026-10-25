@@ -1,0 +1,151 @@
+.button {
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: auto;
+  padding: var(--spacing-xs) var(--spacing-s);
+  border-radius: var(--radius-control);
+  border: 1px solid var(--border);
+  font-size: var(--font-s);
+  line-height: 18px;
+  font-weight: 400;
+  color: var(--text);
+  background: var(--surface);
+  white-space: nowrap;
+  text-align: center;
+  text-decoration: none;
+  appearance: none;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+
+  &:hover:not(:disabled) {
+    border-color: var(--border-strong);
+    background: var(--surface-hover);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
+  }
+
+  &:disabled:not(.loading) {
+    color: var(--text-tertiary);
+    cursor: default;
+
+    &:hover {
+      border-color: var(--border);
+      background: var(--surface);
+    }
+  }
+
+  &.loading {
+    pointer-events: none;
+    cursor: default;
+
+    &:disabled {
+      opacity: 1;
+      color: var(--text);
+      cursor: default;
+    }
+  }
+}
+
+.icon {
+  flex: none;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+}
+
+.small {
+  min-height: 32px;
+  padding: 4px 10px;
+}
+
+.square {
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+}
+
+.full {
+  width: 100%;
+}
+
+.start {
+  justify-content: flex-start;
+}
+
+.ghost {
+  border-color: transparent;
+  background: transparent;
+  padding: 8px 16px;
+
+  &:hover:not(:disabled) {
+    background: var(--surface-muted);
+    border-color: transparent;
+  }
+}
+
+.primary {
+  background: var(--primary-button);
+  color: var(--text-inverse);
+  border-color: transparent;
+  font-weight: 500;
+
+  &:hover:not(:disabled) {
+    background: var(--primary-button-hover);
+    border-color: transparent;
+  }
+
+  &:disabled:not(.loading) {
+    color: var(--text-inverse);
+    opacity: 0.45;
+  }
+
+  &.loading:disabled {
+    color: var(--text-inverse);
+    opacity: 1;
+    background: var(--primary-button);
+    border-color: transparent;
+  }
+}
+
+.delete {
+  &:hover:not(:disabled) {
+    background: var(--error);
+    color: #fff;
+    border-color: var(--error);
+  }
+}
+
+.active {
+  background: var(--hairline);
+  border-color: transparent;
+}
+
+.round {
+  border-radius: 999px;
+}
+
+.sharp {
+  border-radius: 0;
+}
+
+.circle {
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+  border-radius: 50%;
+}

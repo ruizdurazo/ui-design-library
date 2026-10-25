@@ -1,0 +1,102 @@
+.number {
+  --stepper-width: 50px;
+
+  &:hover:not([data-invalid]) input:not(:focus) {
+    border-color: var(--border-strong);
+  }
+}
+
+.withSuffix {
+  padding-right: calc(var(--suffix) + 10px);
+}
+
+.withStep {
+  transition:
+    border-color 0.2s,
+    background-color 0.2s,
+    padding-right 0.15s ease;
+}
+
+.number:hover .withStep,
+.number:focus-within .withStep {
+  padding-right: calc(var(--suffix, 0px) + var(--stepper-width) + 8px);
+}
+
+.suffix,
+.stepper {
+  position: absolute;
+  top: 1px;
+  display: flex;
+  align-items: center;
+  height: calc(var(--input-height) - 2px);
+}
+
+.suffix {
+  right: 1px;
+  pointer-events: none;
+}
+
+.stepper {
+  right: calc(var(--suffix, 0px) + 1px);
+  justify-content: flex-end;
+  gap: 2px;
+  width: var(--stepper-width);
+  padding-right: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.number:hover .stepper,
+.number:focus-within .stepper {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: var(--surface-muted);
+    color: var(--text);
+  }
+
+  &:disabled {
+    color: var(--text-tertiary);
+    cursor: default;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
+  }
+}
+
+.units {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 12px;
+  border-left: 1px solid var(--hairline);
+  border-radius: 0 7px 7px 0;
+  background: var(--surface-hover);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .withStep,
+  .stepper {
+    transition: none;
+  }
+}

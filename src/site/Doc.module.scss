@@ -1,0 +1,181 @@
+.page {
+  display: flex;
+  justify-content: center;
+  padding: 40px 24px 64px;
+
+  @media (min-width: 900px) {
+    padding: 56px 40px 80px;
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  max-width: 760px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  h1 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+
+  p {
+    max-width: 58ch;
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+.rule {
+  height: 0.5px;
+  background: var(--border);
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  h2 {
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  button {
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 13px;
+    padding: 4px 0;
+
+    &:hover {
+      color: var(--text);
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+  }
+}
+
+.stage {
+  background: var(--stage);
+  border-radius: 16px;
+  box-shadow: var(--shadow-tile);
+  padding: 4px;
+}
+
+.stageInner,
+.stageStart {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 20px;
+}
+
+.stageInner {
+  align-items: center;
+  justify-content: center;
+  min-height: 88px;
+}
+
+.stageStart {
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.code {
+  margin: 0;
+  padding: 16px 18px;
+  overflow: auto;
+  border-radius: 16px;
+  background: var(--tile);
+  color: var(--text);
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.55;
+  white-space: pre;
+}
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 8px;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1 1 0;
+    max-width: calc(50% - 6px);
+    padding: 14px 18px;
+    border-radius: 14px;
+    text-decoration: none;
+
+    &:hover {
+      color: var(--text);
+      background: var(--surface);
+    }
+
+    &:focus {
+      outline: none;
+      background: var(--surface);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 1px;
+    }
+  }
+}
+
+.pagerCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.kicker {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.next {
+  margin-left: auto;
+  justify-content: flex-end;
+  text-align: right;
+
+  .pagerCopy {
+    align-items: flex-end;
+  }
+}

@@ -1,0 +1,410 @@
+.root {
+  position: relative;
+  display: flex;
+  width: max-content;
+  max-width: 100%;
+
+  &:has(.viewport) {
+    z-index: 20;
+  }
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  list-style: none;
+}
+
+.trigger,
+.item > .link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: var(--font-s);
+  line-height: 18px;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  appearance: none;
+
+  &:hover {
+    color: var(--text);
+    background: color-mix(in srgb, var(--text) 5%, transparent);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
+  }
+
+  &[data-state='open'] {
+    color: var(--text);
+    background: color-mix(in srgb, var(--text) 5%, transparent);
+  }
+
+  &[data-active] {
+    color: var(--text);
+    background: color-mix(in srgb, var(--text) 5%, transparent);
+  }
+
+  &[data-disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.caret {
+  color: var(--text-tertiary);
+  transition: transform 0.2s ease;
+}
+
+.trigger[data-state='open'] .caret {
+  color: var(--text-secondary);
+  transform: rotate(180deg);
+}
+
+.indicator {
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 16px;
+  top: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  transition:
+    width 0.2s ease,
+    transform 0.2s ease;
+
+  &[data-state='visible'] {
+    animation: fade-in 150ms ease;
+  }
+
+  &[data-state='hidden'] {
+    animation: fade-out 120ms ease;
+  }
+}
+
+.arrow {
+  position: relative;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  background: var(--surface);
+  border-top: 1px solid var(--hairline);
+  border-left: 1px solid var(--hairline);
+  border-radius: 2px 0 0 0;
+  transform: rotate(45deg);
+}
+
+.viewportPosition {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  width: max-content;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.viewport {
+  position: relative;
+  flex: none;
+  width: var(--radix-navigation-menu-viewport-width);
+  height: var(--radix-navigation-menu-viewport-height);
+  margin-top: 10px;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  box-shadow: var(--shadow-pop);
+  transform-origin: top center;
+  pointer-events: auto;
+  transition:
+    width 0.22s ease,
+    height 0.22s ease;
+
+  &[data-state='open'] {
+    animation: scale-in 180ms ease;
+  }
+
+  &[data-state='closed'] {
+    animation: scale-out 140ms ease;
+  }
+}
+
+.content {
+  outline: none;
+}
+
+.viewport > .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation-duration: 200ms;
+  animation-timing-function: ease;
+
+  &[data-motion='from-start'] {
+    animation-name: enter-from-start;
+  }
+
+  &[data-motion='from-end'] {
+    animation-name: enter-from-end;
+  }
+
+  &[data-motion='to-start'] {
+    animation-name: exit-to-start;
+  }
+
+  &[data-motion='to-end'] {
+    animation-name: exit-to-end;
+  }
+}
+
+.grid,
+.stack {
+  padding: 8px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  width: min(520px, calc(100vw - 48px));
+
+  @media (min-width: 640px) {
+    grid-template-columns: 1fr 1fr;
+    width: 520px;
+  }
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: min(300px, calc(100vw - 48px));
+}
+
+.linkCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--text);
+  text-decoration: none;
+
+  &:hover {
+    background: var(--surface-muted);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: -2px;
+  }
+
+  &[data-active] {
+    background: var(--hairline);
+  }
+}
+
+.linkIcon {
+  margin-top: 1px;
+  color: var(--text-secondary);
+}
+
+.linkCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.linkTitle {
+  font-size: var(--font-s);
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.linkDescription {
+  color: var(--text-secondary);
+  font-size: var(--font-xs);
+  line-height: 16px;
+}
+
+.sub {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: min(420px, calc(100vw - 48px));
+  padding: 8px;
+}
+
+.listSub {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+  padding: 0;
+}
+
+.sub .item {
+  display: contents;
+}
+
+.triggerSub {
+  order: 0;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font-size: var(--font-xs);
+
+  &:hover {
+    background: transparent;
+    color: var(--text);
+  }
+
+  &[data-state='open'],
+  &[data-state='open']:hover {
+    background: var(--shell);
+    color: var(--text);
+  }
+}
+
+.sub .content {
+  order: 1;
+  flex: 1 0 100%;
+  width: 100%;
+  padding: 4px 0 0;
+
+  &[data-state='closed'] {
+    display: none;
+  }
+
+  &[data-state='open'] {
+    animation: fade-in 150ms ease;
+  }
+}
+
+.sub .grid,
+.sub .stack {
+  width: auto;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scale-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes enter-from-end {
+  from {
+    opacity: 0;
+    transform: translateX(48px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes enter-from-start {
+  from {
+    opacity: 0;
+    transform: translateX(-48px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes exit-to-end {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(48px);
+  }
+}
+
+@keyframes exit-to-start {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-48px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caret,
+  .indicator,
+  .viewport,
+  .content {
+    animation: none !important;
+    transition: none !important;
+  }
+}

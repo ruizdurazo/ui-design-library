@@ -1,0 +1,79 @@
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  text-align: left;
+
+  span:first-child {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.icons {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-secondary);
+}
+
+.clear {
+  display: inline-flex;
+  color: var(--text-tertiary);
+
+  &:hover {
+    color: var(--text);
+  }
+}
+
+.chevron {
+  display: inline-flex;
+}
+
+.content {
+  z-index: 60;
+  min-width: var(--radix-select-trigger-width);
+  max-height: min(320px, 70svh);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  box-shadow: var(--shadow-pop);
+}
+
+.viewport {
+  padding: 4px;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 8px 32px 8px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.2;
+  color: var(--text);
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+
+  &[data-highlighted] {
+    background: var(--surface-muted);
+  }
+
+  &[data-disabled] {
+    opacity: 0.5;
+  }
+}
+
+.indicator {
+  position: absolute;
+  right: 8px;
+  display: inline-flex;
+  color: var(--primary);
+}

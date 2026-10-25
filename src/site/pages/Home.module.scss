@@ -1,0 +1,137 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+  padding: 4px;
+  min-height: 100%;
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  padding: 16px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--tile);
+  box-shadow: var(--shadow-tile);
+  color: var(--text);
+}
+
+.workspace,
+.buttonTile,
+.context,
+.color {
+  min-height: 220px;
+}
+
+.field {
+  width: min(100%, 320px);
+
+  > * {
+    margin-bottom: 0;
+  }
+}
+
+.type {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2px;
+  padding: 28px;
+
+  p {
+    font-size: clamp(22px, 2vw, 28px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.25;
+  }
+}
+
+.meta {
+  display: flex;
+  gap: 8px;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  color: var(--text-secondary);
+
+  strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+}
+
+.listSplit {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 4px;
+  min-height: 0;
+}
+
+.title {
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 28px;
+
+  h1 {
+    font-size: clamp(40px, 4.6vw, 64px);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+  }
+}
+
+.pills {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.context {
+  padding: 0;
+}
+
+.contextTarget {
+  display: grid;
+  place-items: center;
+  flex: 1;
+  align-self: stretch;
+  width: 100%;
+  color: var(--text-secondary);
+  font-size: 14px;
+  user-select: none;
+}
+
+.control {
+  width: min(100%, 280px);
+}
+
+@media (min-width: 1100px) {
+  .grid {
+    height: 100%;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-rows: repeat(7, minmax(0, 1fr));
+  }
+
+  .tile {
+    min-height: 0;
+  }
+
+  .workspace { grid-column: span 2; grid-row: span 2; }
+  .buttonTile { grid-row: span 2; }
+  .type { grid-column: span 2; }
+  .slider { grid-column: span 2; }
+  .listSplit { grid-row: span 3; }
+  .title { grid-column: span 3; grid-row: span 3; order: 0; }
+  .context { grid-row: span 2; }
+  .color { grid-row: span 2; }
+  .schedule { grid-column: span 2; grid-row: span 2; }
+  .date { grid-column: span 2; grid-row: span 2; }
+}
+
+@media (max-width: 1099px) {
+  .title { order: -1; }
+}
