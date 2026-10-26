@@ -1445,6 +1445,7 @@ export function ColorPage() {
 // }
 
 // const skyline = `${import.meta.env.BASE_URL}assets/images/`
+const compareAssets = `${import.meta.env.BASE_URL}assets/compare/`
 
 export function ComparePage() {
   return (
@@ -1493,6 +1494,40 @@ export function ComparePage() {
           afterLabelTone="dark"
           before={<SpendSpecimen marked />}
           after={<SpendSpecimen />}
+        />
+      </Section>
+      <Section
+        title="Images"
+        align="start"
+        code={`<Compare
+  aspectRatio="877 / 675"
+  beforeLabel="Blueprint (SVG)"
+  afterLabel="Rendering (PNG)"
+  beforeLabelTone="dark"
+  afterLabelTone="dark"
+  before={<img src="/assets/compare/blueprint.svg" alt="Blueprint of a glass pavilion" />}
+  after={<img src="/assets/compare/rendering.png" alt="Rendering of the same pavilion" />}
+/>`}
+      >
+        <Compare
+          className={styles.imageCompare}
+          aspectRatio="877 / 675"
+          beforeLabel="Blueprint (SVG)"
+          afterLabel="Rendering (PNG)"
+          beforeLabelTone="dark"
+          afterLabelTone="dark"
+          before={
+            <img
+              src={`${compareAssets}blueprint.svg`}
+              alt="Blueprint of a glass pavilion"
+            />
+          }
+          after={
+            <img
+              src={`${compareAssets}rendering.png`}
+              alt="Rendering of the same pavilion"
+            />
+          }
         />
       </Section>
       {/* <Section

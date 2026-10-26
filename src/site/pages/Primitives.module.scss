@@ -13,6 +13,12 @@
   margin-inline: auto;
 }
 
+.imageCompare.imageCompare {
+  flex: none;
+  width: 100%;
+  max-width: 100%;
+}
+
 .photoCompare.photoCompare {
   flex: none;
   align-self: center;
